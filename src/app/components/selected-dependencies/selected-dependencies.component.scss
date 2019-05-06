@@ -1,0 +1,15 @@
+.selected-dependencies {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: 30vw;
+  padding: 12px 0;
+  border-left: solid 1px #ebecee;
+  
+  span {
+    color: #727070;
+    font-size: 16px;
+    padding: 0 10px;
+  }
+}

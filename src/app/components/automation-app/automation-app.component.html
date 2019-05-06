@@ -1,0 +1,24 @@
+<div class="automation-app" [ngClass]="{'selected' : app.selected}">
+  <img class="app-logo" src={{app.logoUrl}} alt="logo">
+  <span class="app-name">{{app.name}}</span>
+
+  <mat-accordion multi>
+    <mat-expansion-panel expanded *ngFor='let endPoint of app.endPoints'>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{endPoint.name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <mat-checkbox
+        *ngFor='let method of endPoint.methods'
+        [checked]="method.selected"
+        (change)='onClick(app, endPoint, method, $event)'
+      >
+        <b>{{method.method}}</b> - {{method.path}}
+      </mat-checkbox>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <fa-icon class="app-box-icon" [icon]="upIcon"></fa-icon>
+</div>

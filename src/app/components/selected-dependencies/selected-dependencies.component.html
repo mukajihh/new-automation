@@ -1,0 +1,9 @@
+<div class="selected-dependencies">
+  <span>Selected Dependencies</span>
+  <ul>
+    <li *ngFor='let dependency of selectedDependencies' (click)="click(dependency)">
+      {{dependency.name}} - {{dependency.method}} {{dependency.endpoint}}
+
+    </li>
+  </ul>
+</div>

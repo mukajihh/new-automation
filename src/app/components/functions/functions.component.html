@@ -1,0 +1,16 @@
+<div class="functions">
+  <span>Functions</span>
+
+  <ul class="list-functions">
+    <li *ngFor='let function of functions'>
+      <div class="function">
+        <fa-icon class="script-logo" [icon]="codeIcon"></fa-icon>
+        <span class="script-name">{{function.name}}</span>
+
+        <fa-icon class="script-box-icon" [icon]="checkIcon"></fa-icon>
+      </div>
+    </li>
+  </ul>
+
+  <span class="empty-functions" *ngIf='!functions.length'>No functions found.</span>
+</div>

@@ -1,0 +1,144 @@
+.automation-app {
+  align-items: center;
+  border-radius: 3px;
+  border: solid 1px #eee;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-bottom: 15px;
+  position: relative;
+  width: 250px;
+  max-height: 290px;
+
+  &.selected {
+    border-color: #1fdb6a;
+  }
+
+  img.app-logo {
+    height: 50px;
+    width: auto;
+    margin: 15px 0;
+  }
+
+  span.app-name {
+    color: #aaa;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 15px 0;
+  }
+
+  /deep/ mat-accordion.mat-accordion {
+    width: 100%;
+    overflow-x: auto;
+
+    
+    &::-webkit-scrollbar-track
+    {
+      background-color: #F1F1F1;
+    }
+
+    &::-webkit-scrollbar
+    {
+      width: 6px;
+      background-color: #F5F5F5;
+    }
+
+    &::-webkit-scrollbar-thumb
+    {
+      border-radius: 6px;
+      background-color: #ccc;
+    }
+
+    .mat-expansion-panel {
+      box-shadow: none;
+      margin: 0;
+
+      .mat-expansion-panel-header {
+        padding: 0 15px;
+        max-height: 15px;
+
+        &:hover {
+          background: transparent;
+        }
+
+        .mat-content {
+          order: 2;
+          margin-left: 5px;
+
+          .mat-expansion-panel-header-title {
+            color: #bbb;
+            font-weight: 500;
+          }
+        }
+
+        .mat-expansion-indicator::after {
+          order: 1;
+          color: #bbb;
+          border-width: 0 1.5px 1.5px 0;
+        }
+      }
+
+      .mat-expansion-panel-content {
+        .mat-expansion-panel-body {
+          padding: 7px 13px 14px;
+
+          /deep/ mat-checkbox.mat-checkbox {
+            display: block;
+
+            .mat-checkbox-layout {
+              .mat-checkbox-label {
+                line-height: 30px;
+                color: #ccc;
+                
+                b {
+                  color: #aaa;
+                }
+              }
+
+              .mat-checkbox-inner-container {
+                margin-right: 5px;
+
+                .mat-checkbox-ripple .mat-ripple-element {
+                  background-color: #1fdb6a !important;
+                }
+
+                .mat-checkbox-frame {
+                  border-width: 1px;
+                  border-color: #bbb;
+                }
+
+                .mat-checkbox-background {
+                  background-color: transparent !important;
+
+                  .mat-checkbox-checkmark {
+                    top: -3px;
+                    width: 20px;
+
+                    .mat-checkbox-checkmark-path { stroke: #1fdb6a !important }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+    }
+  }
+
+  .app-box-icon {
+    background: #1fdb6a;
+    border-radius: 100%;
+    border: 5px solid #fff;
+    bottom: -15px;
+    color: #fff;
+    font-size: 12px;
+    height: 20px;
+    position: absolute;
+    width: 20px;
+    
+    /deep/ & > * {
+      display: block;
+      margin: 4px auto;
+    }
+  }
+}
