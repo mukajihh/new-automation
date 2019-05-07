@@ -6,10 +6,55 @@
   width: 30vw;
   padding: 12px 0;
   border-left: solid 1px #ebecee;
+  background: #fff;
   
-  span {
+  > span {
     color: #727070;
     font-size: 16px;
     padding: 0 10px;
+  }
+
+  ul {
+    li {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      padding: 0 10px;
+      line-height: 35px;
+
+      .dependency-icon {
+        color: #aaa;
+      }
+
+      .dependency-name {
+        color: #888;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .dependency-method {
+        color: #50b6fe;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 0 10px;
+        width: 35px;
+
+        &.delete {
+          color: #f34336;
+        }
+      }
+
+      .dependency-endpoint {
+        text-transform: lowercase;
+        font-size: 14px;
+        color: #888;
+      }
+
+      .dependency-delete-icon {
+        cursor: pointer;
+        color: #aaa;
+        margin-left: auto;
+      }
+    }
   }
 }

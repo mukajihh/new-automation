@@ -1,0 +1,22 @@
+.universal-apps {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 15px;
+
+  span {
+    color: #727070;
+    font-size: 16px;
+
+    &.empty-apps {
+      color: #94a5ac;
+      padding: 15px 5px;
+    }
+  }
+
+  ul.list-apps {
+    li {
+      display: inline-block;
+      margin: 20px 5px;
+    }
+  }
+}

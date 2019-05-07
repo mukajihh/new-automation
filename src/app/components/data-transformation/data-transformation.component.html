@@ -1,0 +1,16 @@
+<div class="data-transformations">
+  <span>Data-Transformations</span>
+
+  <ul class="list-data-transformations">
+    <li *ngFor='let dataTransformation of dataTransformations'>
+      <div class="data-transformation" (click)="onClick(dataTransformation)" [ngClass]="{'selected' : dataTransformation.selected}">
+        <fa-icon class="script-logo" [icon]="exchangeIcon"></fa-icon>
+        <span class="script-name">{{dataTransformation.name}}</span>
+
+        <fa-icon class="script-box-icon" [icon]="checkIcon"></fa-icon>
+      </div>
+    </li>
+  </ul>
+
+  <span class="empty-data-transformations" *ngIf='!dataTransformations.length'>No data-transformations found.</span>
+</div>

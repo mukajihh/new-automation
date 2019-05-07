@@ -1,0 +1,11 @@
+<div class="universal-apps">
+  <span>Universal Apps</span>
+
+  <ul class="list-apps">
+    <li *ngFor='let app of apps'>
+      <automation-app [app]="app" (clickHandler)="onClick($event)"></automation-app>
+    </li>
+  </ul>
+
+  <span class="empty-apps" *ngIf='!apps.length'>No universal apps found. Import one in your project from catalog.</span>
+</div>

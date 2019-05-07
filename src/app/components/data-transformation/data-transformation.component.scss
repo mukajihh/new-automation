@@ -1,4 +1,4 @@
-.functions {
+.data-transformations {
   display: flex;
   flex-flow: column nowrap;
   padding: 15px;
@@ -7,18 +7,18 @@
     color: #727070;
     font-size: 16px;
 
-    &.empty-functions {
+    &.empty-data-transformations {
       color: #94a5ac;
       padding: 15px 5px;
     }
   }
 
-  ul.list-functions {
+  ul.list-data-transformations {
     li {
       display: inline-block;
       margin: 20px 5px;
 
-      .function {
+      .data-transformation {
         align-items: center;
         border-radius: 3px;
         border: solid 1px #eee;

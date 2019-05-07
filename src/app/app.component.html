@@ -11,14 +11,23 @@
       </div>
       <div class="filters-section">
         <span class="filters-label">Filters</span>
-        <button mat-flat-button color="primary">Personal Apps</button>
-        <button mat-flat-button color="primary">Universal Apps</button>
-        <button mat-flat-button color="primary">Functions</button>
-        <button mat-stroked-button>Data-transformations</button>
+        <button *ngIf="showPersonalApps" mat-flat-button color="primary" (click)="onPersonalAppsClick()">Personal Apps</button>
+        <button *ngIf="!showPersonalApps" mat-stroked-button (click)="onPersonalAppsClick()">Personal Apps</button>
+
+        <button *ngIf="showUniversalApps" mat-flat-button color="primary" (click)="onUniversalAppsClick()">Universal Apps</button>
+        <button *ngIf="!showUniversalApps" mat-stroked-button (click)="onUniversalAppsClick()">Universal Apps</button>
+
+        <button *ngIf="showFunctions" mat-flat-button color="primary" (click)="onFunctionsClick()">Functions</button>
+        <button *ngIf="!showFunctions" mat-stroked-button (click)="onFunctionsClick()">Functions</button>
+
+        <button *ngIf="showDataTransformations" mat-flat-button color="primary" (click)="onDataTransformationsClick()">Data-transformations</button>
+        <button *ngIf="!showDataTransformations" mat-stroked-button (click)="onDataTransformationsClick()">Data-transformations</button>
       </div>
     </div>
-    <personal-apps></personal-apps>
-    <functions></functions>
+    <personal-apps *ngIf="showPersonalApps"></personal-apps>
+    <universal-apps *ngIf="showUniversalApps"></universal-apps>
+    <functions *ngIf="showFunctions"></functions>
+    <data-transformation *ngIf="showDataTransformations"></data-transformation>
   </div>
   <selected-dependencies></selected-dependencies>
 </main>

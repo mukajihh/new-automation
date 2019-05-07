@@ -3,7 +3,7 @@
 
   <ul class="list-functions">
     <li *ngFor='let function of functions'>
-      <div class="function">
+      <div class="function" (click)="onClick(function)" [ngClass]="{'selected' : function.selected}">
         <fa-icon class="script-logo" [icon]="codeIcon"></fa-icon>
         <span class="script-name">{{function.name}}</span>
 

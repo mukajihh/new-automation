@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SelectedDependenciesComponent } from '../components/selected-dependencies/selected-dependencies.component';
+import { IconDefinition, faPuzzlePiece, faExchangeAlt, faCode } from '@fortawesome/free-solid-svg-icons';
 
 export class Method {
   method = '';
@@ -72,7 +73,7 @@ export class DataTransformation {
   }
 }
 
-const enum dependencyType {
+export enum DependencyType {
   PERSONAL_APP = 'PERSONAL_APP',
   UNIVERSAL_APP = 'UNIVERSAL_APP',
   FUNCTION = 'FUNCTION',
@@ -80,13 +81,15 @@ const enum dependencyType {
 }
 
 export class Dependency {
-  type: dependencyType;
+  type: DependencyType;
+  icon: IconDefinition;
   name = '';
   method = '';
   endpoint = '';
 
-  constructor(type: dependencyType, name, method, endpoint) {
+  constructor(type: DependencyType, icon: IconDefinition, name, method, endpoint) {
     this.type = type;
+    this.icon = icon;
     this.name = name;
     this.method = method;
     this.endpoint = endpoint;
@@ -138,11 +141,11 @@ export class AppDataService {
         if (term) {
           if (event.checked) {
             term.selected = true;
-            this.selectedDependencies.push(new Dependency(dependencyType.PERSONAL_APP, app.name, method.method, route.name));
+            this.selectedDependencies.push(new Dependency(DependencyType.PERSONAL_APP, faPuzzlePiece, app.name, method.method, route.name));
           } else {
             term.selected = false;
             let dependency = this.selectedDependencies.find(dependency => {
-              if (dependency.name === app.name && dependency.method === method.method && dependency.endpoint === route.name) {
+              if (dependency.type === DependencyType.PERSONAL_APP && dependency.name === app.name && dependency.method === method.method && dependency.endpoint === route.name) {
                 return true;
               } else {
                 return false;
@@ -163,16 +166,119 @@ export class AppDataService {
     }
   }
 
-  deletePersonalAppDependencySelection = (dependency: Dependency) => {
-    let app = this.personalApps.find(app => app.name === dependency.name);
+  toggleUniversalAppDependencySelection = (universalApp: App, endPoint: EndPoint, method: Method, event) => {
+    let app = this.universalApps.find(app => app === universalApp);
+    if (app) {
+      let route = app.endPoints.find(route => route === endPoint);
+      if (route) {
+        let term = route.methods.find(term => term === method);
+        if (term) {
+          if (event.checked) {
+            term.selected = true;
+            this.selectedDependencies.push(new Dependency(DependencyType.UNIVERSAL_APP, faPuzzlePiece, app.name, method.method, route.name));
+          } else {
+            term.selected = false;
+            let dependency = this.selectedDependencies.find(dependency => {
+              if (dependency.type === DependencyType.UNIVERSAL_APP && dependency.name === app.name && dependency.method === method.method && dependency.endpoint === route.name) {
+                return true;
+              } else {
+                return false;
+              }
+            });
+            if (dependency) {
+              this.selectedDependencies.splice(this.selectedDependencies.indexOf(dependency), 1);
+            }
+          }
+
+          if (this.selectedDependencies.find(dependency => dependency.name === universalApp.name)) {
+            app.selected = true;
+          } else {
+            app.selected = false;
+          }
+        }
+      }
+    }
+  }
+
+  toggleFunctionDependencySelection = (func: Function) => {
+    let f = this.functions.find(f => f === func);
+    if (f) {
+      if (f.selected) {
+        f.selected = false;
+        let dependency = this.selectedDependencies.find(dependency => {
+          if (dependency.type === DependencyType.FUNCTION && dependency.name === f.name) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        if (dependency) {
+          this.selectedDependencies.splice(this.selectedDependencies.indexOf(dependency), 1);
+        }
+      } else {
+        f.selected = true;
+        this.selectedDependencies.push(new Dependency(DependencyType.FUNCTION, faCode, f.name, '', ''));
+      }
+    }
+  }
+
+  toggleDataTransformationDependencySelection = (dataTransformation: DataTransformation) => {
+    let dtransf = this.dataTransformations.find(dtransf => dtransf === dataTransformation);
+    if (dtransf) {
+      if (dtransf.selected) {
+        dtransf.selected = false;
+        let dependency = this.selectedDependencies.find(dependency => {
+          if (dependency.type === DependencyType.DATATRANSFORMATION && dependency.name === dtransf.name) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        if (dependency) {
+          this.selectedDependencies.splice(this.selectedDependencies.indexOf(dependency), 1);
+        }
+      } else {
+        dtransf.selected = true;
+        this.selectedDependencies.push(new Dependency(DependencyType.DATATRANSFORMATION, faExchangeAlt, dtransf.name, '', ''));
+      }
+    }
+  }
+
+  deleteAppDependencySelection = (dependency: Dependency) => {
+    let app: App;
+    if (dependency.type === DependencyType.PERSONAL_APP) {
+      app = this.personalApps.find(app => app.name === dependency.name);
+    } else {
+      app = this.universalApps.find(app => app.name === dependency.name);
+    }
     if (app) {
       let route = app.endPoints.find(route => route.name === dependency.endpoint);
       if (route) {
         let term = route.methods.find(term => term.method === dependency.method);
         if (term) {
-          this.togglePersonalAppDependencySelection(app, route, term, {checked: false});
+          if (dependency.type === DependencyType.PERSONAL_APP) {
+            this.togglePersonalAppDependencySelection(app, route, term, {checked: false});
+          } else {
+            this.toggleUniversalAppDependencySelection(app, route, term, {checked: false});
+          }
         }
       }
+    }
+  }
+
+  deleteFunctionDependencySelection = (dependency: Dependency) => {
+    let func = this.functions.find(func => func.name === dependency.name);
+    if (func) {
+      this.toggleFunctionDependencySelection(func);
+    }
+  }
+
+  deleteDataTransformationDependencySelection = (dependency: Dependency) => {
+    let dtrans = this.dataTransformations.find(dtrans => dtrans.name === dependency.name);
+    if (dtrans) {
+      this.toggleDataTransformationDependencySelection(dtrans);
     }
   }
 

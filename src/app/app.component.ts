@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AppDataService } from './services/app-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +6,26 @@ import { AppDataService } from './services/app-data.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private appDataService: AppDataService) {}
+  showPersonalApps = true;
+  showUniversalApps = true;
+  showFunctions = true;
+  showDataTransformations = true;
+
+  constructor() {}
+
+  onPersonalAppsClick = () => {
+    this.showPersonalApps = !this.showPersonalApps;
+  }
+
+  onUniversalAppsClick = () => {
+    this.showUniversalApps = !this.showUniversalApps;
+  }
+
+  onFunctionsClick = () => {
+    this.showFunctions = !this.showFunctions;
+  }
+
+  onDataTransformationsClick = () => {
+    this.showDataTransformations = !this.showDataTransformations;
+  }
 }

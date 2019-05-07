@@ -9,8 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule, MatButtonModule, MatExpansionModule, MatCheckboxModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PersonalAppsComponent } from './components/personal-apps/personal-apps.component';
+import { UniversalAppsComponent } from './components/universal-apps/universal-apps.component';
 import { AutomationAppComponent } from './components/automation-app/automation-app.component';
 import { FunctionsComponent } from './components/functions/functions.component';
+import { DataTransformationComponent } from './components/data-transformation/data-transformation.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,10 @@ import { FunctionsComponent } from './components/functions/functions.component';
     SelectedDependenciesComponent,
     FooterComponent,
     PersonalAppsComponent,
+    UniversalAppsComponent,
     AutomationAppComponent,
-    FunctionsComponent
+    FunctionsComponent,
+    DataTransformationComponent
   ],
   imports: [
     BrowserModule,

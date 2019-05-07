@@ -1,9 +1,12 @@
 <div class="selected-dependencies">
   <span>Selected Dependencies</span>
   <ul>
-    <li *ngFor='let dependency of selectedDependencies' (click)="click(dependency)">
-      {{dependency.name}} - {{dependency.method}} {{dependency.endpoint}}
-
+    <li *ngFor='let dependency of selectedDependencies'>
+      <fa-icon class="dependency-icon" [icon]="dependency.icon"></fa-icon>
+      <span class="dependency-name">{{dependency.name}}</span>
+      <span class="dependency-method" [ngClass]="{'delete' : dependency.method == 'DELETE'}">{{dependency.method}}</span>
+      <span class="dependency-endpoint">{{dependency.endpoint}}</span>
+      <fa-icon class="dependency-delete-icon" [icon]="trashIcon" (click)="click(dependency)"></fa-icon>
     </li>
   </ul>
 </div>
